@@ -1,0 +1,50 @@
+From 56d6b281f8ac3a5dc66c9e6356603a43dd88382b Mon Sep 17 00:00:00 2001
+From: Gerco <gerco@gdries.nl>
+Date: Tue, 29 Sep 2015 23:30:42 +0000
+Subject: [PATCH] Fix build errors on Alpine Linux
+
+---
+ shellinabox/launcher.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
+
+diff --git a/shellinabox/launcher.c b/shellinabox/launcher.c
+index 2bac171..612a6c6 100644
+--- a/shellinabox/launcher.c
++++ b/shellinabox/launcher.c
+@@ -66,6 +66,7 @@
+ #include <sys/types.h>
+ #include <sys/wait.h>
+ #include <sys/utsname.h>
++#include <sys/ttydefaults.h>
+ #include <termios.h>
+ #include <unistd.h>
+
+@@ -1572,19 +1573,19 @@ static void childProcess(struct Service *service, int width, int height,
+ #ifdef HAVE_UTMPX_H
+   if (enableUtmpLogging) {
+     setutxent();
+-    struct utmpx utmpx            = utmp->utmpx;
++    struct utmpx utmpxx            = utmp->utmpx;
+     if (service->useLogin || service->authUser) {
+-      utmpx.ut_type               = LOGIN_PROCESS;
+-      memset(utmpx.ut_host, 0, sizeof(utmpx.ut_host));
++      utmpxx.ut_type               = LOGIN_PROCESS;
++      memset(utmpxx.ut_host, 0, sizeof(utmpxx.ut_host));
+     }
+-    pututxline(&utmpx);
++    pututxline(&utmpxx);
+     endutxent();
+
+ #if defined(HAVE_UPDWTMP) || defined(HAVE_UPDWTMPX)
+     if (!utmp->useLogin) {
+-      memset(&utmpx.ut_user, 0, sizeof(utmpx.ut_user));
+-      strncat(&utmpx.ut_user[0], "LOGIN", sizeof(utmpx.ut_user) - 1);
+-      updwtmpx("/var/log/wtmp", &utmpx);
++      memset(&utmpxx.ut_user, 0, sizeof(utmpxx.ut_user));
++      strncat(&utmpxx.ut_user[0], "LOGIN", sizeof(utmpxx.ut_user) - 1);
++      updwtmpx("/var/log/wtmp", &utmpxx);
+     }
+ #endif
+   }
+--
+2.4.1
