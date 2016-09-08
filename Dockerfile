@@ -16,7 +16,7 @@ ENV SIAB_USERCSS="Normal:+/etc/shellinabox/options-enabled/00+Black-on-White.css
   SIAB_PKGS=none \
   SIAB_SCRIPT=none
 
-ADD build/shellinabox.tar.gz /
+ADD files/shellinabox.tar.gz /
 ADD files/user-css.tar.gz /
 
 
