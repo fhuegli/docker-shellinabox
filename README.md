@@ -1,8 +1,8 @@
 # docker-shellinabox
 shellinabox for docker based on alpine linux https://hub.docker.com/r/fhuegli/shellinabox/
 
-# Configuration
-## Available Environment Variables
+## Configuration
+### Available Environment Variables
 
  - **SIAB_USERCSS**: String of configured and enabled css extensions. Defaults to system default list.
  - **SIAB_PORT** The port where shellinabox should listen to. Defaults to 4200.
