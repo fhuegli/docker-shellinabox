@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  shellinabox:
+    image: fhuegli/shellinabox:latest
+    environment:
+    - SIAB_USER=siab
+    - SIAB_PASSWORD=my_password
+    - SIAB_SSL=false
+    - SIAB_PKGS=
+    - SIAB_SERVICE=/:LOGIN
+    ports:
+    - 4200:4200
