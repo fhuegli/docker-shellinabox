@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: shellinabox
+  labels:
+    name: shellinabox
+spec:
+  ports:
+  - port: 4200
+    protocol: TCP
+    targetPort: 4200
+  selector:
+    name: shellinabox
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: shellinabox
+  labels:
+    name: shellinabox
+spec:
+  replicas: 1
+  selector:
+    name: shellinabox
+  template:
+    metadata:
+      labels:
+        name: shellinabox
+    spec:
+      containers:
+      - name: shellinabox
+        image: fhuegli/shellinabox:latest
+        resources:
+          limits:
+            cpu: 100m
+            memory: 50Mi
+          requests:
+            cpu: 100m
+            memory: 10Mi
+        env:
+        - name: SIAB_USER
+          value: siab
+        - name: SIAB_PASSWORD
+          value: my_password
+        - name: SIAB_SSL
+          value: "false"
+        - name: SIAB_PKGS
+          value: ""
+        - name: SIAB_SERVICE
+          value: "/:LOGIN"
+        ports:
+        - containerPort: 4200
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /home
+          name: shellinabox-volume
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 4200
+          initialDelaySeconds: 300
+          timeoutSeconds: 30
+      volumes:
+      - name: shellinabox-volume
+        emptyDir: {}
