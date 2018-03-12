@@ -24,7 +24,7 @@ fi
 if [ "${SIAB_ADDUSER}" == "true" ]; then
 	sudo=""
 	if [ "${SIAB_SUDO}" == "true" ]; then
-		sudo="-G sudo"
+		sudo="-G wheel"
 	fi
 	/usr/sbin/addgroup -g ${SIAB_GROUPID} ${SIAB_GROUP}
         if [ -d ${SIAB_HOME} ]; then

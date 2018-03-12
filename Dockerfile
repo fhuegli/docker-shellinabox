@@ -21,7 +21,8 @@ ADD files/user-css.tar.gz /
 
 
 RUN apk add --update bash openssl curl openssh-client sudo && rm -rf /var/cache/apk/* && \
-   adduser -D -H -h /home/shellinabox shellinabox && mkdir /var/lib/shellinabox
+   adduser -D -H -h /home/shellinabox shellinabox && mkdir /var/lib/shellinabox && \
+   echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 #  ln -sf '/etc/shellinabox/options-enabled/00+Black on White.css' \
 #    /etc/shellinabox/options-enabled/00+Black-on-White.css && \
 #  ln -sf '/etc/shellinabox/options-enabled/00_White On Black.css' \
