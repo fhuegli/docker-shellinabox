@@ -8,7 +8,7 @@ hex()
 }
 
 echo "Preparing container .."
-COMMAND="/usr/bin/shellinaboxd --no-beep -u shellinabox -g shellinabox -p ${SIAB_PORT} --user-css ${SIAB_USERCSS}"
+COMMAND="/usr/bin/shellinaboxd --no-beep -u shellinaboxd -g shellinaboxd -p ${SIAB_PORT} --user-css ${SIAB_USERCSS}"
 
 if [ "$SIAB_PKGS" != "none" ]; then
 	set +e
