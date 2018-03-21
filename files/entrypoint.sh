@@ -29,7 +29,7 @@ if [ "${SIAB_ADDUSER}" == "true" ]; then
 		/usr/sbin/adduser -u ${SIAB_USERID} -s ${SIAB_SHELL} -h ${SIAB_HOME} -D ${SIAB_USER}
 	fi
 	if [ "${SIAB_SUDO}" == "true" ]; then
-		/usr/sbin/usermod ${SIAB_USERID} -G wheel
+		/usr/sbin/usermod ${SIAB_USER} -G wheel
 	fi
 	if [ "${SIAB_PASSWORD}" == "putsafepasswordhere" ]; then
 		SIAB_PASSWORD=$(hex)
