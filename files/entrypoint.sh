@@ -23,14 +23,13 @@ fi
 
 if [ "${SIAB_ADDUSER}" == "true" ]; then
 	sudo=""
-	if [ "${SIAB_SUDO}" == "true" ]; then
-		sudo="-G wheel"
-	fi
-	/usr/sbin/addgroup -g ${SIAB_GROUPID} ${SIAB_GROUP}
         if [ -d ${SIAB_HOME} ]; then
-		/usr/sbin/adduser -u ${SIAB_USERID} -G ${SIAB_GROUP} ${sudo} -s ${SIAB_SHELL} -h ${SIAB_HOME} -H -D ${SIAB_USER}
+		/usr/sbin/adduser -u ${SIAB_USERID} -s ${SIAB_SHELL} -h ${SIAB_HOME} -H -D ${SIAB_USER}
 	else
-		/usr/sbin/adduser -u ${SIAB_USERID} -G ${SIAB_GROUP} ${sudo} -s ${SIAB_SHELL} -h ${SIAB_HOME} -D ${SIAB_USER}
+		/usr/sbin/adduser -u ${SIAB_USERID} -s ${SIAB_SHELL} -h ${SIAB_HOME} -D ${SIAB_USER}
+	fi
+	if [ "${SIAB_SUDO}" == "true" ]; then
+		/usr/sbin/usermod ${SIAB_USERID} -G wheel
 	fi
 	if [ "${SIAB_PASSWORD}" == "putsafepasswordhere" ]; then
 		SIAB_PASSWORD=$(hex)

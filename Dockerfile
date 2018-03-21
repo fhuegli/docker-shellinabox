@@ -20,8 +20,10 @@ ADD files/user-css.tar.gz /
 
 
 RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
+    chmod 755 /etc && \
     apk update && \
-    apk add --update bash openssl curl openssh-client sudo shellinabox && rm -rf /var/cache/apk/* && \
+    apk upgrade && \
+    apk add --update util-linux pciutils coreutils binutils findutils grep bash bash-completion openssl curl openssh-client sudo shellinabox && rm -rf /var/cache/apk/* && \
     echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 
 EXPOSE 4200
