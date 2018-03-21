@@ -16,24 +16,17 @@ ENV SIAB_USERCSS="Normal:+/etc/shellinabox/options-enabled/00+Black-on-White.css
   SIAB_PKGS=none \
   SIAB_SCRIPT=none
 
-ADD files/shellinabox.tar.gz /
 ADD files/user-css.tar.gz /
 
 
-RUN apk add --update bash openssl curl openssh-client sudo && rm -rf /var/cache/apk/* && \
-   adduser -D -H -h /home/shellinabox shellinabox && mkdir /var/lib/shellinabox && \
-   echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
-#  ln -sf '/etc/shellinabox/options-enabled/00+Black on White.css' \
-#    /etc/shellinabox/options-enabled/00+Black-on-White.css && \
-#  ln -sf '/etc/shellinabox/options-enabled/00_White On Black.css' \
-#    /etc/shellinabox/options-enabled/00_White-On-Black.css && \
-#  ln -sf '/etc/shellinabox/options-enabled/01+Color Terminal.css' \
-#    /etc/shellinabox/options-enabled/01+Color-Terminal.css
-
+RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
+    apk update && \
+    apk add --update bash openssl curl openssh-client sudo shellinabox && rm -rf /var/cache/apk/* && \
+    echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 
 EXPOSE 4200
 
-VOLUME /etc/shellinabox /var/log/supervisor /home
+VOLUME /home
 
 ADD files/entrypoint.sh /
 
