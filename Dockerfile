@@ -23,7 +23,7 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/reposit
     chmod 755 /etc && \
     apk update && \
     apk upgrade && \
-    apk add --update util-linux pciutils coreutils binutils findutils grep bash bash-completion openssl curl openssh-client sudo shellinabox && rm -rf /var/cache/apk/* && \
+    apk add --update shadow util-linux pciutils coreutils binutils findutils grep bash bash-completion openssl curl openssh-client sudo shellinabox && rm -rf /var/cache/apk/* && \
     echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 
 EXPOSE 4200
