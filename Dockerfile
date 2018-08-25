@@ -21,6 +21,7 @@ ADD files/user-css.tar.gz /
 
 RUN echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
     chmod 755 /etc && \
+    passwd -l root && \
     apk update && \
     apk upgrade && \
     apk add --update shadow util-linux pciutils coreutils binutils findutils grep bash bash-completion openssl curl openssh-client sudo shellinabox && rm -rf /var/cache/apk/* && \
