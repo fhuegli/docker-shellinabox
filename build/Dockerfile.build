@@ -1,7 +1,7 @@
 FROM alpine:latest
 
 RUN apk add --update alpine-sdk autoconf automake libtool && rm -rf /var/cache/apk/*
-COPY build-on-alpine.patch /build-on-alpine.patch
+COPY build-on-alpine.patch /build-on-alpine.patch && passwd -l root
 
 RUN git clone https://github.com/shellinabox/shellinabox.git /shellinabox && \
 	cd /shellinabox && \
