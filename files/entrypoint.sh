@@ -52,6 +52,9 @@ if [ "$SIAB_SCRIPT" != "none" ]; then
 	set -e
 fi
 
+echo "Lookdown root account.."
+passwd -l root
+
 echo "Starting container .."
 if [ "$@" = "shellinabox" ]; then
 	echo "Executing: ${COMMAND}"
